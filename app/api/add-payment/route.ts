@@ -16,5 +16,5 @@ export async function GET(request: Request) {
   }
  
   const users = await sql`SELECT * FROM Payment;`;
-  return NextResponse.json({ users }, { status: 200 });
+  return NextResponse.json(users.rows, { status: 200 });
 }

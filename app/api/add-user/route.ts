@@ -14,5 +14,5 @@ export async function GET(request: Request) {
   }
  
   const users = await sql`SELECT * FROM Users;`;
-  return NextResponse.json({ users }, { status: 200 });
+  const response = NextResponse.json(users.rows, { status: 200 });
 }
