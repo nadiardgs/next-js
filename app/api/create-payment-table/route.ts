@@ -8,8 +8,7 @@ export async function GET(request: Request) {
         Id SERIAL PRIMARY KEY, 
         Name VARCHAR(25) NOT NULL, 
         UserId INT, 
-        Amount INT,
-        CONSTRAINT fkuser FOREIGN KEY(UserId) REFERENCES Users(Id));`;
+        Amount INT);`;
     return NextResponse.json({ result }, { status: 200 });
   } 
   catch (error) {
