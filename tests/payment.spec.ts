@@ -13,7 +13,7 @@ test.describe('API add-payment', () => {
       userId: 0
     }
 
-    test.beforeAll(async ({request}) => {
+    test.beforeEach(async ({request}) => {
       const res = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-user?userName=${USER.userName}&userEmail=${USER.userEmail}`);
       
       expect(res.status()).toBe(200);
@@ -26,7 +26,7 @@ test.describe('API add-payment', () => {
       USER.userId = parseInt(id[0]);
     });
 
-    test.afterAll(async ({request}) => {
+    test.afterEach(async ({request}) => {
       const res = await request.delete('https://next-js-lilac-tau-38.vercel.app/api/delete-payment',{
           data:{
               "name": PAYMENT.paymentName
