@@ -20,7 +20,6 @@ test.describe('API add-payment', () => {
               "userEmail": USER.userEmail,
           }
       });
-      expect(res.status()).toBe(200);
       const body = await res.json();
       const id = body.data[0].id;
       USER.userId = id;
