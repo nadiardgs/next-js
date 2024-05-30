@@ -40,9 +40,9 @@ test.describe('API add-payment', () => {
         expect(response.status()).toBe(200);
 
         const body = await response.json();
-        const name = body.data[0].paymentName;
-        const id = body.data[0].userId;
-        const amount = body.data[0].paymentAmount;
+        const name = body.paymentName;
+        const id = body.userId;
+        const amount = body.paymentAmount;
 
         expect(name).toBe(PAYMENT.paymentName);
         expect(id).toBe(PAYMENT.userId);
