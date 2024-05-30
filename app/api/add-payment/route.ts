@@ -9,12 +9,12 @@ export async function GET(request: Request) {
  
   try {
     if (!paymentName || !userId || !paymentAmount) throw new Error('Payment name, user ID and payment amount required');
-    await sql`INSERT INTO Payment (Name, UserId, Amount) VALUES 
+    await sql`INSERT INTO Payments (Name, UserId, Amount) VALUES 
     (${paymentName}, ${userId}, ${paymentAmount});`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
  
-  const users = await sql`SELECT * FROM Payment WHERE Name = ${paymentName};`;
+  const users = await sql`SELECT * FROM Payments WHERE Name = ${paymentName};`;
   return NextResponse.json(users.rows, { status: 200 });
 }
