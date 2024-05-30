@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   try 
   {
     if (!userId) throw new Error('User ID required');
-    const payments = await sql`SELECT Id, Name, UserId, Amount FROM Payment WHERE UserId = ${userId};`;
+    const payments = await sql`SELECT Id, Name, UserId, Amount FROM Payments WHERE UserId = ${userId};`;
     return NextResponse.json(payments.rows, { status: 200 });
   } 
   catch (error) 

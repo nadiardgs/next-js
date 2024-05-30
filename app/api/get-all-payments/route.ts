@@ -5,7 +5,7 @@ export async function GET(request: Request, response: Response) {
 
     try 
     {
-        const users = await sql`SELECT * FROM Payment;`;
+        const users = await sql`SELECT * FROM Payments;`;
         return NextResponse.json(users.rows, { status: 200 });
     }
     catch (error)
