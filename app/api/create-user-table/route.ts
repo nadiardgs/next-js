@@ -7,7 +7,7 @@ export async function GET(request: Request) {
       await sql`CREATE TABLE IF NOT EXISTS Users (
         Id SERIAL PRIMARY KEY, 
         Name VARCHAR(25), 
-        Email VARCHAR(25));`;
+        Email VARCHAR(255));`;
     return NextResponse.json({ result }, { status: 200 });
   } 
   catch (error) {
