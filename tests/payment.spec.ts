@@ -19,10 +19,9 @@ test.describe('API add-payment', () => {
 
       const body = await res.json();
 
-      console.log(body);
-      
       const id = body.id;
       USER.userId = id;
+      console.log(USER.userId);
     });
 
     test.afterAll(async ({request}) => {
@@ -35,14 +34,8 @@ test.describe('API add-payment', () => {
       const body = await res.json();
       });
 
-      test.only('API Post Request', async ({ request }) => {
-        const response = await request.post('https://next-js-lilac-tau-38.vercel.app/api/add-payment', {
-          data: {
-            "paymentName" : PAYMENT.paymentName,
-            "userId": USER.userId,
-            "paymentAmount": PAYMENT.paymentAmount
-          }
-        });
+      test.only('API Get Request', async ({ request }) => {
+        const response = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-payment?paymentName=${PAYMENT.paymentName}&userId=${USER.userId}&paymentAmount=${PAYMENT.paymentAmount}`);
 
         expect(response.status()).toBe(200);
 
