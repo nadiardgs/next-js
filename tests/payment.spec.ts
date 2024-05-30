@@ -20,7 +20,7 @@ test.describe('API add-payment', () => {
       const response = await res.json();
       const json = JSON.stringify(response);
 
-      const str = json[0].split(':');
+      const str = json.split(':');
       USER.userId = parseInt(str[6]);
       console.log(str[0]);
       console.log(str[1]);
