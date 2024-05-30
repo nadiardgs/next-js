@@ -14,7 +14,7 @@ test.describe('API add-payment', () => {
     }
 
     test.beforeAll(async ({request}) => {
-      const res = await request.post('https://next-js-lilac-tau-38.vercel.app/api/add-user',{
+      const res = await request.get('https://next-js-lilac-tau-38.vercel.app/api/add-user',{
           data:{
               "userName": USER.userName,
               "userEmail": USER.userEmail,
