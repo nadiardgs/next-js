@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request: Request) {
   try {
     const result =
-      await sql`CREATE TABLE IF NOT EXISTS Payment (
+      await sql`CREATE TABLE IF NOT EXISTS Payments (
         Id SERIAL PRIMARY KEY, 
         Name VARCHAR(25) NOT NULL, 
         UserId INT, 
