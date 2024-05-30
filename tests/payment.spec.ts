@@ -3,14 +3,14 @@ import test, { expect } from "@playwright/test";
 test.describe('API add-payment', () => {
   const PAYMENT = {
       paymentName: "Payment",
-      userId: null,
+      userId: 0,
       paymentAmount: 10
     }
   
     const USER = {
       userName: "Playwright",
       userEmail: "play@wright.com",
-      userId: null
+      userId: 0
     }
 
     test.beforeAll(async ({request}) => {
@@ -18,13 +18,10 @@ test.describe('API add-payment', () => {
       expect(res.status()).toBe(200);
 
       const response = await res.json();
+      const json = JSON.stringify(response);
 
-      let id = await response.body().then((b: { toString: () => string; }) => { 
-        let data = JSON.parse(b.toString()); 
-        return data.id;
-    });
-
-      USER.userId = id;
+      const str = json[0].split(':');
+      USER.userId = parseInt(str[6]);
       console.log(USER.userId);
     });
 
