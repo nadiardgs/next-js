@@ -20,17 +20,18 @@ test.describe('API add-payment', () => {
       const response = await res.json();
       const json = JSON.stringify(response);
 
-      const str = json.split(':');
-      USER.userId = parseInt(str[6]);
-      console.log(str[0]);
-      console.log(str[1]);
-      console.log(str[2]);
-      console.log(str[3]);
-      console.log(str[4]);
-      console.log(str[5]);
-      console.log(str[6]);
-      console.log(str[7]);
-      console.log(str[8]);
+      const line = json.split(':');
+      const id = line[1].split(',');
+      USER.userId = parseInt(id[0]);
+      console.log(line[0]);
+      console.log(line[1]);
+      console.log(line[2]);
+      console.log(line[3]);
+      console.log(line[4]);
+      console.log(line[5]);
+      console.log(line[6]);
+      console.log(line[7]);
+      console.log(line[8]);
 
     });
 
