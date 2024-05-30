@@ -1,13 +1,21 @@
 import test, { expect } from "@playwright/test";
 
-
-https://next-js-lilac-tau-38.vercel.app/api/add-payment?paymentName=test001&userId=1&paymentAmount=21
 test.describe('API add-payment', () => {
   const PAYMENT = {
       paymentName: "Playwright",
       userId: 3,
       paymentAmount: 10
   }
+
+  test.afterAll(async ({request}) => {
+    const res = await request.delete('https://next-js-lilac-tau-38.vercel.app/api/add-payment',{
+        data:{
+            "name": PAYMENT.paymentName
+        }
+    });
+    expect(res.status()).toBe(200);
+    const body = await res.json();
+});
 
   test.only('API Post Request', async ({ request }) => {
     const response = await request.post('https://next-js-lilac-tau-38.vercel.app/api/add-payment', {
