@@ -39,9 +39,8 @@ test.describe('API add-payment', () => {
       expect(res.status()).toBe(200);
 
       const response = await res.json();
-      const json = JSON.stringify(response);
 
-      const id = getElementFromJson(json, 'id');
+      const id = getElementFromJson(response, 'id');
 
       USER.userId = parseInt(id);
     });
