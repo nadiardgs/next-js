@@ -13,6 +13,10 @@ test.describe('API add-payment', () => {
       userId: 0
     }
 
+    function removeChar(str: string, char: any) {
+      return str.replace(new RegExp(char, 'g'), () => '');
+  }
+
     function getElementFromJson(json : any, element: string): string
             {
             const jsonAsString = JSON.stringify(json);
@@ -29,8 +33,10 @@ test.describe('API add-payment', () => {
 
             if (line == '') return line;
 
-            const value = line.split(':');
-            return value[1];
+            let value = line.split(':')[1];
+            value = removeChar(value, "\\");
+            value = removeChar(value, "\"");
+            return value;
         }
 
     test.beforeEach(async ({request}) => {
@@ -63,9 +69,12 @@ test.describe('API add-payment', () => {
         const body = await response.json();
         const json = JSON.stringify(body);
 
-        const name = testHelper.getElementFromJson(json, 'name');
-        const userId = testHelper.getElementFromJson(json, 'userId');
-        const amount = testHelper.getElementFromJson(json, 'amount');
+        const name = getElementFromJson(json, 'name');
+        console.log(name);
+        const userId = getElementFromJson(json, 'userId');
+        console.log(userId);
+        const amount = getElementFromJson(json, 'amount');
+        console.log(amount);
 
         expect(name).toBe(PAYMENT.paymentName);
         expect(userId).toBe(PAYMENT.userId);
