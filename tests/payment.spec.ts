@@ -13,6 +13,26 @@ test.describe('API add-payment', () => {
       userId: 0
     }
 
+    function getElementFromJson(json : any, element: string): string
+            {
+            const jsonAsString = JSON.stringify(json);
+            const arrayJson = jsonAsString.split(',');
+            let line = '';
+
+            for (let i = 0; i < arrayJson.length; i++)
+            {
+                if (arrayJson[i].includes(element))
+                {
+                    line = arrayJson[i];
+                }
+            }
+
+            if (line == '') return line;
+
+            const value = line.split(':');
+            return value[1];
+        }
+
     test.beforeEach(async ({request}) => {
       const res = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-user?userName=${USER.userName}&userEmail=${USER.userEmail}`);
       
@@ -21,9 +41,9 @@ test.describe('API add-payment', () => {
       const response = await res.json();
       const json = JSON.stringify(response);
 
-      const line = json.split(':');
-      const id = line[1].split(',');
-      USER.userId = parseInt(id[0]);
+      const id = getElementFromJson(json, 'id');
+
+      USER.userId = parseInt(id);
     });
 
     test.afterEach(async ({request}) => {
@@ -41,12 +61,15 @@ test.describe('API add-payment', () => {
         expect(response.status()).toBe(200);
 
         const body = await response.json();
-        const name = body.paymentName;
-        const id = body.userId;
-        const amount = body.paymentAmount;
+        const json = JSON.stringify(body);
+
+        const name = testHelper.getElementFromJson(json, 'name');
+        const userId = testHelper.getElementFromJson(json, 'userId');
+        const amount = testHelper.getElementFromJson(json, 'amount');
 
         expect(name).toBe(PAYMENT.paymentName);
-        expect(id).toBe(PAYMENT.userId);
+        expect(userId).toBe(PAYMENT.userId);
         expect(amount).toBe(PAYMENT.paymentAmount);
     })
+    
   });
