@@ -13,10 +13,6 @@ test.describe('API add-payment', () => {
       userId: 0
     }
 
-    function removeChar(str: string, char: any) {
-      return str.replace(new RegExp(char, 'g'), () => '');
-  }
-
     function getElementFromJson(json : any, element: string): string
             {
             const jsonAsString = JSON.stringify(json);
@@ -34,8 +30,6 @@ test.describe('API add-payment', () => {
             if (line == '') return line;
 
             let value = line.split(':')[1];
-            value = removeChar(value, "\\");
-            value = removeChar(value, "\"");
             return value;
         }
 
@@ -66,8 +60,7 @@ test.describe('API add-payment', () => {
 
         expect(response.status()).toBe(200);
 
-        const body = await response.json();
-        const json = JSON.stringify(body);
+        const json = await response.json();
 
         const name = getElementFromJson(json, 'name');
         console.log(name);
