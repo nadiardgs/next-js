@@ -23,7 +23,6 @@ test.describe('API add-payment', () => {
      {
         if (arrayJson[i].includes(element))
         {
-          console.log('array position is ' + arrayJson[i] + ' and element is ' + element);
             line = arrayJson[i];
         }
       }
@@ -76,7 +75,7 @@ test.describe('API add-payment', () => {
         ///name = removeCharacterFromElement(`/['"]`, '');
         
         console.log(json);
-        const userId = getElementFromJson(json, 'userId');
+        const userId = getElementFromJson(json, 'userid');
 
         const amount = getElementFromJson(json, 'amount');
 
