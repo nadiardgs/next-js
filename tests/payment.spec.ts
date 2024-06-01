@@ -55,9 +55,6 @@ test.describe('API add-payment', () => {
       expect(res.status()).toBe(200);
       });
 
-      console.log(PAYMENT.paymentName);
-      console.log(PAYMENT.paymentAmount);
-
       test.only('API Get Request', async ({ request }) => {
         const response = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-payment?paymentName=${PAYMENT.paymentName}&userId=${USER.userId}&paymentAmount=${PAYMENT.paymentAmount}`);
 
