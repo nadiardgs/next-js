@@ -14,24 +14,32 @@ test.describe('API add-payment', () => {
     }
 
     function getElementFromJson(json : any, element: string): string
-            {
-            const jsonAsString = JSON.stringify(json);
-            const arrayJson = jsonAsString.split(',');
-            let line = '';
+    {
+      const jsonAsString = JSON.stringify(json);
+      const arrayJson = jsonAsString.split(',');
+      let line = '';
 
-            for (let i = 0; i < arrayJson.length; i++)
-            {
-                if (arrayJson[i].includes(element))
-                {
-                    line = arrayJson[i];
-                }
-            }
-
-            if (line == '') return line;
-
-            let value = line.split(':')[1];
-            return value;
+     for (let i = 0; i < arrayJson.length; i++)
+     {
+        if (arrayJson[i].includes(element))
+        {
+            line = arrayJson[i];
         }
+      }
+
+      if (line == '') return line;
+
+      let value = line.split(':')[1];
+      value = removeCharacterFromElement(`/['"]`, '');
+      value = removeCharacterFromElement(`/\\`, '');
+
+      return value;
+    }
+
+    function removeCharacterFromElement(element : string, character : string) : string
+    {
+      return element.replace(character+'+/g', '');
+    }
 
     test.beforeEach(async ({request}) => {
       const res = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-user?userName=${USER.userName}&userEmail=${USER.userEmail}`);
