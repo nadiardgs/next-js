@@ -34,11 +34,6 @@ test.describe('API add-payment', () => {
       return value;
     }
 
-    function removeCharacterFromElement(element : string, character : string) : string
-    {
-      return element.replace(character+'+/g', '');
-    }
-
     test.beforeAll(async ({request}) => {
       const res = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-user?userName=${USER.userName}&userEmail=${USER.userEmail}`);
       
@@ -72,12 +67,10 @@ test.describe('API add-payment', () => {
 
         let name = getElementFromJson(json, 'name');
         name = name.replace(/['"]+/g, '');
-        ///name = removeCharacterFromElement(`/['"]`, '');
-        
-        console.log(json);
-        const userId = getElementFromJson(json, 'userid');
 
-        const amount = getElementFromJson(json, 'amount');
+        const userId = parseInt(getElementFromJson(json, 'userid'));
+
+        const amount = parseInt(getElementFromJson(json, 'amount'));
 
         expect(name).toBe(PAYMENT.paymentName);
         expect(userId).toBe(USER.userId);
