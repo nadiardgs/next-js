@@ -81,7 +81,7 @@ test.describe('API add-payment', () => {
         const amount = getElementFromJson(json, 'amount');
 
         expect(name).toBe(PAYMENT.paymentName);
-        expect(userId).toBe(PAYMENT.userId);
+        expect(userId).toBe(USER.userId);
         expect(amount).toBe(PAYMENT.paymentAmount);
     })
     
