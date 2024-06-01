@@ -30,8 +30,6 @@ test.describe('API add-payment', () => {
       if (line == '') return line;
 
       let value = line.split(':')[1];
-      value = removeCharacterFromElement(`/['"]`, '');
-      value = removeCharacterFromElement(`/\\`, '');
 
       return value;
     }
@@ -52,9 +50,7 @@ test.describe('API add-payment', () => {
 
       const id = getElementFromJson(response, 'id');
       
-      console.log(id);
       USER.userId = parseInt(id);
-      console.log(USER.userId);
     });
 
     test.afterAll(async ({request}) => {
@@ -76,12 +72,13 @@ test.describe('API add-payment', () => {
 
         const json = await response.json();
 
-        const name = getElementFromJson(json, 'name');
-        console.log(name);
+        let name = getElementFromJson(json, 'name');
+        name = removeCharacterFromElement(`/['"]`, '');
+        name = removeCharacterFromElement(`/\\`, '');
+        
         const userId = getElementFromJson(json, 'userId');
-        console.log(userId);
+
         const amount = getElementFromJson(json, 'amount');
-        console.log(amount);
 
         expect(name).toBe(PAYMENT.paymentName);
         expect(userId).toBe(PAYMENT.userId);
