@@ -1,16 +1,16 @@
 import test, { expect } from "@playwright/test";
 
 test.describe('API add-payment', () => {
+  const USER = {
+    userName: "Playwright",
+    userEmail: "play@wright.com",
+    userId: 0
+  }
+  
   const PAYMENT = {
       paymentName: "Payment",
-      userId: 0,
+      userId: USER.userId,
       paymentAmount: 10
-    }
-  
-    const USER = {
-      userName: "Playwright",
-      userEmail: "play@wright.com",
-      userId: 0
     }
 
     function getElementFromJson(json : any, element: string): string
@@ -41,7 +41,7 @@ test.describe('API add-payment', () => {
       return element.replace(character+'+/g', '');
     }
 
-    test.beforeEach(async ({request}) => {
+    test.beforeAll(async ({request}) => {
       const res = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-user?userName=${USER.userName}&userEmail=${USER.userEmail}`);
       
       expect(res.status()).toBe(200);
@@ -51,9 +51,10 @@ test.describe('API add-payment', () => {
       const id = getElementFromJson(response, 'id');
 
       USER.userId = parseInt(id);
+      console.log(USER.userId);
     });
 
-    test.afterEach(async ({request}) => {
+    test.afterAll(async ({request}) => {
       const res = await request.delete('https://next-js-lilac-tau-38.vercel.app/api/delete-payment',{
           data:{
               "name": PAYMENT.paymentName
@@ -63,9 +64,8 @@ test.describe('API add-payment', () => {
       });
 
       console.log(PAYMENT.paymentName);
-      console.log(USER.userId);
       console.log(PAYMENT.paymentAmount);
-      
+
       test.only('API Get Request', async ({ request }) => {
         const response = await request.get(`https://next-js-lilac-tau-38.vercel.app/api/add-payment?paymentName=${PAYMENT.paymentName}&userId=${USER.userId}&paymentAmount=${PAYMENT.paymentAmount}`);
 
