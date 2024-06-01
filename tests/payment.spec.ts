@@ -48,6 +48,8 @@ test.describe('API add-payment', () => {
 
       const response = await res.json();
 
+      console.log(response);
+
       const id = getElementFromJson(response, 'id');
       
       console.log(id);
