@@ -74,7 +74,7 @@ test.describe('API add-payment', () => {
 
         let name = getElementFromJson(json, 'name');
         name = removeCharacterFromElement(`/['"]`, '');
-        name = removeCharacterFromElement(`/\\`, '');
+        name = removeCharacterFromElement(`/['\"]`, '');
         
         const userId = getElementFromJson(json, 'userId');
 
