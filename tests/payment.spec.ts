@@ -46,8 +46,6 @@ test.describe('API add-payment', () => {
 
       const response = await res.json();
 
-      console.log(response);
-
       const id = getElementFromJson(response, 'id');
       
       USER.userId = parseInt(id);
@@ -76,6 +74,7 @@ test.describe('API add-payment', () => {
         name = name.replace(/['"]+/g, '');
         ///name = removeCharacterFromElement(`/['"]`, '');
         
+        console.log(response);
         const userId = getElementFromJson(json, 'userId');
 
         const amount = getElementFromJson(json, 'amount');
